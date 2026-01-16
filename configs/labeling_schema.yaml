@@ -1,0 +1,87 @@
+version: 1
+
+scoring:
+  title_weight: 2
+  body_weight: 1
+  evidence_window_chars: 220
+
+ontology:
+
+  ENTRY_EXIT:
+    positive_patterns:
+      - "enter(s|ed)? the South African market"
+      - "launched in South Africa"
+      - "withdraw(s|al)?"
+      - "exit(s|ed)?"
+      - "distributor"
+      - "importer"
+    negative_patterns:
+      - "entered into an agreement"
+    min_score: 3
+
+  LAUNCH_PRODUCT:
+    positive_patterns:
+      - "launch(es|ed)?"
+      - "unveil(s|ed)?"
+      - "introduc(es|ed)?"
+      - "new model"
+      - "facelift"
+      - "updated model"
+    negative_patterns: []
+    min_score: 3
+
+  PRICE_ACTION:
+    positive_patterns:
+      - "price cut"
+      - "reduced price"
+      - "discount"
+      - "special offer"
+      - "pricing starts at"
+      - "from R"
+      - "deal"
+      - "incentive"
+    negative_patterns: []
+    min_score: 3
+
+  RECALL_QUALITY:
+    positive_patterns:
+      - "recall"
+      - "safety defect"
+      - "fault"
+      - "airbag"
+      - "fire risk"
+    negative_patterns: []
+    min_score: 2
+
+  CAPACITY_SUPPLY:
+    positive_patterns:
+      - "shortage"
+      - "supply constraint"
+      - "production halted"
+      - "shipping delay"
+      - "port delays"
+      - "backlog"
+    negative_patterns: []
+    min_score: 2
+
+  DEALER_NETWORK:
+    positive_patterns:
+      - "new dealership"
+      - "dealer network"
+      - "showroom"
+      - "retail footprint"
+      - "expanded network"
+    negative_patterns: []
+    min_score: 2
+
+  EV_POLICY_INFRA:
+    positive_patterns:
+      - "charging infrastructure"
+      - "charging network"
+      - "incentive"
+      - "import duty"
+      - "EV policy"
+      - "electric vehicle"
+      - "battery electric"
+    negative_patterns: []
+    min_score: 2

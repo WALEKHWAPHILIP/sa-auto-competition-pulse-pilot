@@ -1,0 +1,30 @@
+version: 1
+
+project:
+  name: "sa-auto-competition-pulse"
+  timezone: "Africa/Johannesburg"
+  country: "ZA"
+
+run:
+  # We start with a small historical window for speed; extend later without code changes.
+  start_date: "2024-01-01"
+  end_date: null  # null = up to today
+  max_articles_per_source_per_run: 250
+
+http:
+  user_agent: "Academic research bot (see repo README)"
+  timeout_seconds: 25
+  rate_limit_seconds: 3
+  max_retries: 3
+
+storage:
+  raw_news_dir: "data/raw/news_html"
+  raw_naamsa_dir: "data/raw/naamsa_pdfs"
+  processed_dir: "data/processed"
+
+text:
+  # Deduping and cleaning
+  min_article_chars: 800
+  dedupe:
+    method: "simhash"
+    hamming_threshold: 3

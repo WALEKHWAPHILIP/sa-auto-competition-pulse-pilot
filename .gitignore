@@ -1,0 +1,25 @@
+(
+echo # Python
+echo __pycache__/
+echo *.py[cod]
+echo *.pyo
+echo *.pyd
+echo *.egg-info/
+echo .venv/
+echo .uv/
+echo .env
+echo.
+echo # Data (keep raw/processed out of git; configs define reproduction)
+echo data/raw/
+echo data/processed/
+echo.
+echo # Notebooks / outputs
+echo .ipynb_checkpoints/
+echo reports/figures/
+echo reports/tables/
+echo.
+echo # OS/editor
+echo .DS_Store
+echo Thumbs.db
+echo .vscode/
+) > .gitignore
