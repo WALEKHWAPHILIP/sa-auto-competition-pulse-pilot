@@ -1,3 +1,5 @@
+powershell -NoProfile -Command @'
+
 \# SA Auto Competition Pulse (Pilot)
 
 
@@ -52,7 +54,9 @@ ENTRY\_EXIT, LAUNCH\_PRODUCT, PRICE\_ACTION, RECALL\_QUALITY, CAPACITY\_SUPPLY, 
 
 \## Quickstart (environment)
 
-See Batch 1 setup steps to create `.venv` and install `requirements.txt`.
+Create a venv, install `requirements.txt`, then run the pipeline scripts in `src/`.
+
+'@ | Set-Content -Encoding UTF8 README.md
 
 
 
