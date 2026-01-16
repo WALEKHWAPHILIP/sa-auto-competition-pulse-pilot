@@ -4,6 +4,18 @@ powershell -NoProfile -Command @'
 
 
 
+\# -------------------------------
+
+\# README.md for GitHub / Markdown
+
+\# -------------------------------
+
+
+
+\# SA Auto Competition Pulse (Pilot)
+
+
+
 \*\*Goal:\*\* Build a reproducible pipeline that converts South African automotive news into monthly competition-event time series and links them to monthly new-vehicle sales (NAAMSA), producing figures, tables, and a short research memo.
 
 
@@ -32,29 +44,33 @@ All source rules live in `configs/sources.yaml`. Global pipeline settings live i
 
 Multi-label event types defined in `configs/labeling\_schema.yaml`:
 
-ENTRY\_EXIT, LAUNCH\_PRODUCT, PRICE\_ACTION, RECALL\_QUALITY, CAPACITY\_SUPPLY, DEALER\_NETWORK, EV\_POLICY\_INFRA.
+`ENTRY\_EXIT`, `LAUNCH\_PRODUCT`, `PRICE\_ACTION`, `RECALL\_QUALITY`, `CAPACITY\_SUPPLY`, `DEALER\_NETWORK`, `EV\_POLICY\_INFRA`.
 
 
 
 \## Repo structure
 
-\- `configs/` configuration registry (sources, pipeline, labeling)
+\- `configs/` — configuration registry (sources, pipeline, labeling)
 
-\- `data/raw/` immutable snapshots (HTML/PDF)
+\- `data/raw/` — immutable snapshots (HTML/PDF)
 
-\- `data/processed/` analysis-ready datasets
+\- `data/processed/` — analysis-ready datasets
 
-\- `reports/` figures, tables, memo
+\- `reports/` — figures, tables, memo
 
-\- `src/` pipeline code
+\- `src/` — pipeline code
 
-\- `tests/` minimal tests
+\- `tests/` — minimal tests
 
 
 
 \## Quickstart (environment)
 
-Create a venv, install `requirements.txt`, then run the pipeline scripts in `src/`.
+1\. Create a virtual environment (venv)
+
+2\. Install dependencies: `pip install -r requirements.txt`
+
+3\. Run pipeline scripts in `src/`
 
 '@ | Set-Content -Encoding UTF8 README.md
 
