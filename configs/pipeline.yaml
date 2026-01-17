@@ -28,3 +28,7 @@ text:
   dedupe:
     method: "simhash"
     hamming_threshold: 3
+
+naamsa:
+  download_limit: 40
+  max_parse_pages: 20
