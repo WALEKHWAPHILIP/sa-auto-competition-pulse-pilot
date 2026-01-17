@@ -1,18 +1,18 @@
 powershell -NoProfile -Command @'
 
-\# SA Auto Competition Pulse (Pilot)
+# SA Auto Competition Pulse (Pilot)
 
 
 
-\# -------------------------------
+# -------------------------------
 
-\# README.md for GitHub / Markdown
+# README.md for GitHub / Markdown
 
-\# -------------------------------
+# -------------------------------
 
 
 
-\# SA Auto Competition Pulse (Pilot)
+# SA Auto Competition Pulse (Pilot)
 
 
 
@@ -20,19 +20,19 @@ powershell -NoProfile -Command @'
 
 
 
-\## Research question
+## Research question
 
 Do competition-relevant news events predict or coincide with changes in monthly new-vehicle sales in South Africa?
 
 
 
-\## Data sources (v1)
+## Data sources (v1)
 
-\- NAAMSA press releases index + monthly sales PDFs (downloaded and snapshotted)
+- NAAMSA press releases index + monthly sales PDFs (downloaded and snapshotted)
 
-\- BusinessTech Motoring
+- BusinessTech Motoring
 
-\- IOL Motoring Industry News
+- IOL Motoring Industry News
 
 
 
@@ -40,7 +40,7 @@ All source rules live in `configs/sources.yaml`. Global pipeline settings live i
 
 
 
-\## Event ontology (v1)
+## Event ontology (v1)
 
 Multi-label event types defined in `configs/labeling\_schema.yaml`:
 
@@ -48,29 +48,29 @@ Multi-label event types defined in `configs/labeling\_schema.yaml`:
 
 
 
-\## Repo structure
+## Repo structure
 
-\- `configs/` — configuration registry (sources, pipeline, labeling)
+- `configs/` — configuration registry (sources, pipeline, labeling)
 
-\- `data/raw/` — immutable snapshots (HTML/PDF)
+- `data/raw/` — immutable snapshots (HTML/PDF)
 
-\- `data/processed/` — analysis-ready datasets
+- `data/processed/` — analysis-ready datasets
 
-\- `reports/` — figures, tables, memo
+- `reports/` — figures, tables, memo
 
-\- `src/` — pipeline code
+- `src/` — pipeline code
 
-\- `tests/` — minimal tests
+- `tests/` — minimal tests
 
 
 
-\## Quickstart (environment)
+## Quickstart (environment)
 
-1\. Create a virtual environment (venv)
+1. Create a virtual environment (venv)
 
-2\. Install dependencies: `pip install -r requirements.txt`
+2. Install dependencies: `pip install -r requirements.txt`
 
-3\. Run pipeline scripts in `src/`
+3. Run pipeline scripts in `src/`
 
 '@ | Set-Content -Encoding UTF8 README.md
 
