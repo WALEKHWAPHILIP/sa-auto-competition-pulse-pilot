@@ -2,9 +2,9 @@ version: 1
 
 sources:
 
-  # ----------------------------
-  # NAAMSA discovery (HTML index)
-  # ----------------------------
+  # ============================================================
+  # NAAMSA: HTML discovery page for official press releases
+  # ============================================================
   - source_id: "naamsa_press_releases"
     kind: "html_index"
     base_url: "https://naamsa.net/press-releases/"
@@ -16,12 +16,13 @@ sources:
       - "^https://naamsa\\.net/press-releases/.*"
     deny: []
     notes:
-      purpose: "Discovery page that contains links to flash reports and media releases."
+      purpose: "Single discovery page listing NAAMSA flash reports and media releases."
       citation_hint: "NAAMSA press releases index page"
 
-  # -----------------------------------------
-  # NAAMSA PDFs (targets we actually download)
-  # -----------------------------------------
+
+  # ============================================================
+  # NAAMSA: PDF targets discovered from the HTML index above
+  # ============================================================
   - source_id: "naamsa_pdfs"
     kind: "pdf_targets"
     discovery:
@@ -31,50 +32,98 @@ sources:
         - "wp-content/uploads/.*/.*Flash-Report.*\\.pdf$"
         - "wp-content/uploads/.*/.*New-Vehicle-Sales.*Media-Release.*\\.pdf$"
     notes:
-      purpose: "Monthly flash reports + monthly media releases (PDF) for sales outcomes."
-      citation_hint: "Example NAAMSA PDFs"
+      purpose: "Monthly official NAAMSA sales outcomes (PDFs)."
+      citation_hint: "NAAMSA monthly flash reports and media releases"
 
-  # ----------------------------
-  # News sources (2 only, fixed)
-  # ----------------------------
+
+  # ============================================================
+  # BusinessTech: Primary SA automotive news source
+  # ============================================================
   - source_id: "businesstech_motoring"
     kind: "news_site"
+
+    # --- discovery configuration ---
     discovery:
       method: "section_pagination"
       entry_points:
-        - "https://businesstech.co.za/news/motoring/"
         - "https://businesstech.co.za/news/category/motoring/"
-      pagination:
-        page_pattern: "https://businesstech.co.za/news/category/motoring/page/{page}/"
-        start_page: 1
-        max_pages: 40
+
+    # IMPORTANT:
+    # pagination MUST be top-level (not inside discovery)
+    pagination:
+      page_pattern: "https://businesstech.co.za/news/category/motoring/page/{page}/"
+      start_page: 1
+      max_pages: 200
+
+    # Allow only real article URLs
     allow:
-      - "^https://businesstech\\.co\\.za/news/.*"
+      - "^https://businesstech\\.co\\.za/news/motoring/.*"
+
+    # Explicitly exclude taxonomy and navigation URLs
     deny:
       - "/tag/"
       - "/author/"
       - "/category/"
       - "/page/"
-    notes:
-      purpose: "Automotive market and competition signals (launches, recalls, entries)."
-      citation_hint: "BusinessTech motoring section"
 
+    notes:
+      purpose: "Automotive market, competition, launches, recalls, and industry analysis."
+      citation_hint: "BusinessTech Motoring section"
+
+
+  # ============================================================
+  # News.co.za: Aggregator for SA motoring headlines
+  # ============================================================
+  - source_id: "news_sa_motoring"
+    kind: "news_site"
+
+    discovery:
+      method: "section_pagination"
+      entry_points:
+        - "https://news.co.za/motoring/"
+
+    pagination:
+      page_pattern: "https://news.co.za/motoring/page/{page}/"
+      start_page: 1
+      max_pages: 50
+
+    allow:
+      - "^https://news\\.co\\.za/motoring/.*"
+
+    # Keep deny empty: aggregator URLs are relatively clean
+    deny: []
+
+    notes:
+      purpose: "Headline aggregator pointing to multiple SA motoring publishers."
+      citation_hint: "News South Africa – Motoring"
+
+
+  # ============================================================
+  # IOL: Motoring industry & policy coverage
+  # ============================================================
   - source_id: "iol_industry_news"
     kind: "news_site"
+
     discovery:
       method: "section_pagination"
       entry_points:
         - "https://iol.co.za/motoring/industry-news/"
-      pagination:
-        page_pattern: null
-        start_page: 1
-        max_pages: 60
+
+    # No stable page pattern → rely on crawling entry pages
+    pagination:
+      start_page: 1
+      max_pages: 60
+
     allow:
       - "^https://iol\\.co\\.za/motoring/.*"
+
     deny:
       - "/video/"
       - "/opinion/"
       - "/sport/"
+      - "/author/"
+      - "/tag/"
+
     notes:
-      purpose: "Industry and policy coverage relevant to competition dynamics."
+      purpose: "Automotive industry, regulation, and policy developments."
       citation_hint: "IOL Motoring Industry News"
