@@ -6,10 +6,17 @@ project:
   country: "ZA"
 
 run:
-  # We start with a small historical window for speed; extend later without code changes.
-  start_date: "2024-01-01"
+  # Date window for historical coverage
+  start_date: "2019-01-01"
   end_date: null  # null = up to today
-  max_articles_per_source_per_run: 250
+
+  # Safety rails: avoid old archive years and undated pages
+  min_published_year: 2019
+  drop_undated_articles: true
+
+  # Increase per-source limit now that we want multi-month coverage
+  max_articles_per_source_per_run: 1500
+
 
 http:
   user_agent: "Academic research bot (see repo README)"
@@ -30,5 +37,5 @@ text:
     hamming_threshold: 3
 
 naamsa:
-  download_limit: 40
+  download_limit: 240
   max_parse_pages: 20

@@ -59,3 +59,47 @@ def append_manifest_jsonl(manifest_path: str | Path, record: SnapshotRecord) -> 
     with p.open("a", encoding="utf-8") as f:
         f.write(line + "\n")
 
+
+def extract_text_plus_tables(pdf_path: str, max_pages: int = 2):
+    """
+    Extract text (and best-effort tables) from a PDF.
+    Returns: (text, tables)
+    tables is a list (possibly empty). This keeps the API stable for NAAMSA parsing.
+    """
+    text_parts = []
+    tables = []
+
+    # 1) Try pdfplumber first (best for text + tables)
+    try:
+        import pdfplumber  # type: ignore
+        with pdfplumber.open(pdf_path) as pdf:
+            pages = pdf.pages if not max_pages else pdf.pages[:max_pages]
+            for p in pages:
+                try:
+                    text_parts.append(p.extract_text() or "")
+                except Exception:
+                    text_parts.append("")
+                try:
+                    for t in (p.extract_tables() or []):
+                        tables.append(t)
+                except Exception:
+                    pass
+        return "\n".join(text_parts), tables
+    except Exception:
+        pass
+
+    # 2) Fallback: pypdf (text only)
+    try:
+        from pypdf import PdfReader  # type: ignore
+        reader = PdfReader(pdf_path)
+        n = len(reader.pages) if not max_pages else min(len(reader.pages), max_pages)
+        for i in range(n):
+            try:
+                text_parts.append(reader.pages[i].extract_text() or "")
+            except Exception:
+                text_parts.append("")
+        return "\n".join(text_parts), tables
+    except Exception as e:
+        raise RuntimeError(f"PDF text extraction failed for {pdf_path}: {e}")
+
+

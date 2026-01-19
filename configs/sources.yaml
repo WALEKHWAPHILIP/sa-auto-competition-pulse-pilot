@@ -30,100 +30,204 @@ sources:
       from_source_id: "naamsa_press_releases"
       pdf_allow_regex:
         - "wp-content/uploads/.*/.*Flash-Report.*\\.pdf$"
-        - "wp-content/uploads/.*/.*New-Vehicle-Sales.*Media-Release.*\\.pdf$"
+        - "wp-content/uploads/.*/.*flash-report.*\\.pdf$"
+        - "wp-content/uploads/.*/.*New-Vehicle-Sales.*\\.pdf$"
+        - "wp-content/uploads/.*/.*new-vehicle-sales.*\\.pdf$"
+        - "wp-content/uploads/.*/.*Media-Release.*\\.pdf$"
+        - "wp-content/uploads/.*/.*media-release.*\\.pdf$"
     notes:
-      purpose: "Monthly official NAAMSA sales outcomes (PDFs)."
-      citation_hint: "NAAMSA monthly flash reports and media releases"
+      purpose: "PDF targets (NAAMSA flash reports) to download + parse."
+      citation_hint: "NAAMSA flash report PDFs"
 
 
   # ============================================================
-  # BusinessTech: Primary SA automotive news source
+  # BusinessTech: Primary SA automotive news source (deep archive)
   # ============================================================
   - source_id: "businesstech_motoring"
     kind: "news_site"
-
-    # --- discovery configuration ---
     discovery:
       method: "section_pagination"
       entry_points:
         - "https://businesstech.co.za/news/category/motoring/"
-
-    # IMPORTANT:
-    # pagination MUST be top-level (not inside discovery)
     pagination:
       page_pattern: "https://businesstech.co.za/news/category/motoring/page/{page}/"
       start_page: 1
       max_pages: 200
-
-    # Allow only real article URLs
     allow:
-      - "^https://businesstech\\.co\\.za/news/motoring/.*"
-
-    # Explicitly exclude taxonomy and navigation URLs
+      - "^https://businesstech\\.co\\.za/news/motoring/\\d+/.*"
     deny:
       - "/tag/"
       - "/author/"
       - "/category/"
       - "/page/"
-
     notes:
       purpose: "Automotive market, competition, launches, recalls, and industry analysis."
       citation_hint: "BusinessTech Motoring section"
 
 
   # ============================================================
-  # News.co.za: Aggregator for SA motoring headlines
+  # The Citizen: Motoring (Direct publisher source)
+  # ============================================================
+  - source_id: "citizen_motoring"
+    kind: "news_site"
+    discovery:
+      method: "section_pagination"
+      entry_points:
+        - "https://www.citizen.co.za/motoring/"
+    pagination:
+      page_pattern: "https://www.citizen.co.za/motoring/page/{page}/"
+      start_page: 1
+      max_pages: 200
+    allow:
+      - "^https?://(www\\.)?citizen\\.co\\.za/motoring/.*"
+    deny:
+      - "/tag/"
+      - "/author/"
+      - "/category/"
+      - "/page/"
+      - "premium.citizen.co.za"
+      - "pressreader.com"
+    notes:
+      purpose: "Direct motoring news source with archive pagination."
+      citation_hint: "The Citizen Motoring section"
+
+
+  # ============================================================
+  # TopAuto: Motoring (Direct publisher source)
+  #
+  # TopAuto supports classic pagination /page/2/, /page/3/, etc.
+  # Example page: /page/2/  :contentReference[oaicite:0]{index=0}
+  # ============================================================
+  - source_id: "topauto_motoring"
+    kind: "news_site"
+    discovery:
+      method: "section_pagination"
+      entry_points:
+        - "https://topauto.co.za/"
+    pagination:
+      page_pattern: "https://topauto.co.za/page/{page}/"
+      start_page: 1
+      max_pages: 200
+    allow:
+      - "^https?://(www\\.)?topauto\\.co\\.za/(?!page/).+"
+    deny:
+      - "/page/"
+      - "/tag/"
+      - "/category/"
+      - "facebook.com"
+      - "twitter.com"
+      - "linkedin.com"
+      - "instagram.com"
+      - "youtube.com"
+    notes:
+      purpose: "Direct motoring publisher source (news/features/industry/new models)."
+      citation_hint: "TopAuto motoring pages"
+
+
+  # ============================================================
+  # News.co.za: Aggregator (DISCOVERY ONLY / LINK HUB)
+  #
+  # CRITICAL:
+  # - discovery_only: true means:
+  #   * discover outbound links from the hub
+  #   * DO NOT scrape/save hub pages as articles
+  # - discovered URLs are routed into the correct publisher sources
+  #   (Citizen, TopAuto, IOL, TimesLIVE, etc.)
   # ============================================================
   - source_id: "news_sa_motoring"
     kind: "news_site"
+    discovery_only: true
+    max_discovered_urls: 5000
 
     discovery:
       method: "section_pagination"
       entry_points:
         - "https://news.co.za/motoring/"
-
     pagination:
       page_pattern: "https://news.co.za/motoring/page/{page}/"
       start_page: 1
-      max_pages: 50
+      max_pages: 30
 
+    # Allow outbound publisher article URLs only.
     allow:
-      - "^https://news\\.co\\.za/motoring/.*"
+      - "^https?://(www\\.)?citizen\\.co\\.za/motoring/.*"
+      - "^https?://(www\\.)?iol\\.co\\.za/motoring/.*"
+      - "^https?://iol\\.co\\.za/motoring/.*"
+      - "^https?://(www\\.)?timeslive\\.co\\.za/motoring/.*"
+      - "^https?://(www\\.)?topauto\\.co\\.za/.*"
 
-    # Keep deny empty: aggregator URLs are relatively clean
-    deny: []
+    deny:
+      - "news.co.za"
+      - "/tag/"
+      - "/author/"
+      - "/category/"
+      - "/page/"
+      - "facebook.com"
+      - "twitter.com"
+      - "linkedin.com"
+      - "instagram.com"
+      - "youtube.com"
 
     notes:
-      purpose: "Headline aggregator pointing to multiple SA motoring publishers."
-      citation_hint: "News South Africa – Motoring"
+      purpose: "Aggregator used ONLY to discover outbound motoring links to trusted publishers."
+      citation_hint: "News.co.za Motoring (link hub)"
 
 
   # ============================================================
-  # IOL: Motoring industry & policy coverage
+  # IOL Motoring: Industry news (HTML)
   # ============================================================
-  - source_id: "iol_industry_news"
+  - source_id: "iol_motoring_html"
     kind: "news_site"
-
     discovery:
       method: "section_pagination"
       entry_points:
-        - "https://iol.co.za/motoring/industry-news/"
-
-    # No stable page pattern → rely on crawling entry pages
+        - "https://iol.co.za/motoring"
     pagination:
-      start_page: 1
-      max_pages: 60
-
+      max_pages: 20
     allow:
+      - "^https://www\\.iol\\.co\\.za/motoring/.*"
       - "^https://iol\\.co\\.za/motoring/.*"
-
     deny:
       - "/video/"
       - "/opinion/"
       - "/sport/"
       - "/author/"
       - "/tag/"
-
     notes:
       purpose: "Automotive industry, regulation, and policy developments."
       citation_hint: "IOL Motoring Industry News"
+
+
+  # ============================================================
+  # IOL Motoring (RSS)
+  # ============================================================
+  - source_id: "iol_motoring_rss"
+    kind: "rss_feed"
+    discovery:
+      method: "rss_feed"
+      entry_points:
+        - "https://iol.co.za/rss/iol/motoring"
+    allow:
+      - "^https://www\\.iol\\.co\\.za/motoring/.*"
+      - "^https://iol\\.co\\.za/motoring/.*"
+    deny: []
+    notes:
+      purpose: "RSS feed for IOL Motoring articles."
+      citation_hint: "IOL Motoring RSS feed"
+
+
+  # ============================================================
+  # TimesLIVE Motoring (RSS)
+  # ============================================================
+  - source_id: "timeslive_motoring_rss"
+    kind: "rss_feed"
+    discovery:
+      method: "rss_feed"
+      entry_points:
+        - "https://www.timeslive.co.za/arc/outboundfeeds/rss/category/motoring/"
+    allow:
+      - "^https://www\\.timeslive\\.co\\.za/motoring/.*"
+    deny: []
+    notes:
+      purpose: "RSS feed for TimesLIVE Motoring category."
+      citation_hint: "TimesLIVE Motoring RSS feed"
