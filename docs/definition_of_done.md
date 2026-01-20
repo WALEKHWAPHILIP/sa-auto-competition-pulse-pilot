@@ -1,40 +1,43 @@
-# Definition of Done (Pilot)
+# Definition of Done (Batch 7)
 
+## Rebuild commands (make-like, deterministic)
+From repo root:
 
+1) Audit tables
+- `python -m src.analysis.build_audit_tables`
 
-## Data
+2) Data dictionary (schema snapshot from actual files)
+- `python -m src.analysis.generate_data_dictionary`
 
-- \[ ] News corpus built + deduped + metadata complete
+3) Figure
+- `python -m src.analysis.plot_sales_vs_events`
 
-- \[ ] NAAMSA PDFs parsed successfully into a clean monthly dataset
+4) Baseline lag model table
+- `python -m src.analysis.run_lag_model_baseline`
 
-- \[ ] Raw snapshots are immutable under `data/raw/`
+## Proof artifacts (what “done” produces)
+- `reports\tables\coverage_audit.csv`
+- `reports\tables\missingness_audit.csv`
+- `docs\data_dictionary.md`
+- `reports\figures\sales_vs_event_intensity.png`
+- `reports\tables\lag_model_baseline.csv`
 
+## Pipeline integrity checks (must be visible in outputs)
+- Coverage audit shows month coverage across:
+  - news volume,
+  - event intensity,
+  - NAAMSA availability,
+  - merged panel availability.
+- Missingness audit lists months with missing sales in the merged panel.
 
+## Known limitations (accepted)
+Monthly NAAMSA totals remain missing for the following months (documented limitation):
+- 2019-02
+- 2019-03
+- 2019-04
+- 2023-02
+- 2023-04
+- 2024-04
+- 2026-01
 
-## Methods
-
-- \[ ] Event labels produced from `configs/labeling\_schema.yaml` with evidence windows
-
-- \[ ] Clear monthly aggregation rule for events
-
-
-
-## Outputs
-
-- \[ ] 2–3 figures in `reports/figures/`
-
-- \[ ] 1–2 tables in `reports/tables/`
-
-- \[ ] A 2-page memo in `reports/memo/`
-
-
-
-## Engineering
-
-- \[ ] A clean repo structure from day 1
-
-- \[ ] Re-running the pipeline reproduces processed outputs
-
-
-
+Rationale: we stop expanding PDF discovery at this stage; the repo focuses on research-grade governance + analysis outputs built on the current stable dataset set.
