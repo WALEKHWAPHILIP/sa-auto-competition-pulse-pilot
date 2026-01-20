@@ -92,38 +92,38 @@ Event labeling is **rule-based** (transparent), producing deterministic month-le
 
 ### 0) Create & activate venv (example)
 
-`cd /d C:\apps\sa_motoring_pilot\sa-auto-competition-pulse`
-`python -m venv .venv
+* `cd /d C:\apps\sa_motoring_pilot\sa-auto-competition-pulse`
+* `python -m venv .venv
 .\.venv\Scripts\activate`
-`python -m pip install -U pip
+* `python -m pip install -U pip
 pip install -r requirements.txt`
 
 
 ### 1) Sanity check: compile all modules
 
 
-`python -m compileall src`
+* `python -m compileall src`
 
 
 ### 2) Run the pipeline (core datasets)
 
 #### 2.1 Scrape + dedupe news → `news_articles.csv`
 
-`python -m src.news.scrape_news --pipeline configs\pipeline.yaml --sources configs\sources.yaml`
+* `python -m src.news.scrape_news --pipeline configs\pipeline.yaml --sources configs\sources.yaml`
 
 
 #### 2.2 Label competition events → monthly counts
 
-`python -m src.events.label_events --pipeline configs\pipeline.yaml --schema configs\labeling_schema.yaml`
-`python -m src.news.count_labels --pipeline configs\pipeline.yaml`
+* `python -m src.events.label_events --pipeline configs\pipeline.yaml --schema configs\labeling_schema.yaml`
+* `python -m src.news.count_labels --pipeline configs\pipeline.yaml`
 
 
 #### 2.3 NAAMSA PDFs → monthly totals with evidence
 
 
-`python -m src.naamsa.discover_links --pipeline configs\pipeline.yaml --sources configs\sources.yaml`
-`python -m src.naamsa.download_pdfs --pipeline configs\pipeline.yaml`
-`python -m src.naamsa.parse_sales_headlines --pipeline configs\pipeline.yaml`
+* `python -m src.naamsa.discover_links --pipeline configs\pipeline.yaml --sources configs\sources.yaml`
+* `python -m src.naamsa.download_pdfs --pipeline configs\pipeline.yaml`
+* `python -m src.naamsa.parse_sales_headlines --pipeline configs\pipeline.yaml`
 
 
 > After these steps, the repo should contain the processed CSVs listed in “What this repo produces”.
@@ -132,22 +132,22 @@ pip install -r requirements.txt`
 
 #### 3.1 Coverage + missingness audits
 
-`python -m src.analysis.build_audit_tables`
+* `python -m src.analysis.build_audit_tables`
 
 
 #### 3.2 Auto-generate the data dictionary from current files
 
-`python -m src.analysis.generate_data_dictionary`
+* `python -m src.analysis.generate_data_dictionary`
 
 
 #### 3.3 Plot sales vs event intensity
 
-`python -m src.analysis.plot_sales_vs_events`
+* `python -m src.analysis.plot_sales_vs_events`
 
 
 #### 3.4 Baseline lag model (events_t and events_t-1)
 
-`python -m src.analysis.run_lag_model_baseline`
+* `python -m src.analysis.run_lag_model_baseline`
 
 
 ---
@@ -156,8 +156,7 @@ pip install -r requirements.txt`
 
 ### Confirm processed datasets exist
 
-
-`dir data\processed`
+* `dir data\processed`
 
 
 ### Confirm generated outputs exist
@@ -170,8 +169,7 @@ pip install -r requirements.txt`
 
 ### Inspect the missingness audit
 
-
-`type reports\tables\missingness_audit.csv`
+* `type reports\tables\missingness_audit.csv`
 
 
 ---
