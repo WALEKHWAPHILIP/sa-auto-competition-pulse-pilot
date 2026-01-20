@@ -1,4 +1,3 @@
-powershell -NoProfile -Command @'
 # ===============================
 # Python & Data Science .gitignore
 # ===============================
@@ -6,11 +5,8 @@ powershell -NoProfile -Command @'
 # Python cache and compiled files
 __pycache__/
 *.py[cod]
-*.pyo
 *.pyd
 *.egg-info/
-*.pyc
-*.pylint.d/
 
 # Virtual environments
 .venv/
@@ -19,33 +15,33 @@ __pycache__/
 
 # Jupyter / Notebooks
 .ipynb_checkpoints/
-*.ipynb_checkpoints
 *.nbconvert.ipynb
 
-# Data
-data/raw/
-data/interim/
-data/external/
-
-# Reports / Figures / Outputs
-reports/figures/
-reports/tables/
-logs/
-*.log
+# Testing / typecheck / coverage
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
 
 # IDE / Editor
 .vscode/
 .idea/
-*.sublime-project
-*.sublime-workspace
 
 # OS-specific
 .DS_Store
 Thumbs.db
 
-# Testing / cache
-.pytest_cache/
-.mypy_cache/
-.coverage
-htmlcov/
-'@ | Set-Content -Encoding UTF8 .gitignore
+# Data (raw/intermediate only)
+data/raw/
+data/interim/
+data/external/
+
+# Logs
+logs/
+*.log
+
+# Local dump outputs (never commit)
+local_dumps_ignore/
+
+# Optional: generated-only reports (keep curated figures/tables tracked)
+reports/_generated/
