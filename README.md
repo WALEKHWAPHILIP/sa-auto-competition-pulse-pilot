@@ -161,10 +161,9 @@ pip install -r requirements.txt`
 
 ### Confirm generated outputs exist
 
-
-`dir reports\tables`
-`dir reports\figures`
-`dir docs`
+* `dir reports\tables`
+* `dir reports\figures`
+* `dir docs`
 
 
 ### Inspect the missingness audit
@@ -228,10 +227,10 @@ These files are generated from current `data/processed/`:
 Regenerate with:
 
 
-`python -m src.analysis.build_audit_tables`
-`python -m src.analysis.generate_data_dictionary`
-`python -m src.analysis.plot_sales_vs_events`
-`python -m src.analysis.run_lag_model_baseline`
+* `python -m src.analysis.build_audit_tables`
+* `python -m src.analysis.generate_data_dictionary`
+* `python -m src.analysis.plot_sales_vs_events`
+* `python -m src.analysis.run_lag_model_baseline`
 
 
 ---
