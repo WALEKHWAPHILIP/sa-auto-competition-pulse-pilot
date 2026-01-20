@@ -13,6 +13,14 @@ This pilot is **descriptive**: it builds clean, auditable datasets + baseline pl
 
 ---
 
+## What to look at first (quick replication path)
+
+Start with the dataset schema and quality snapshot in `docs/data_dictionary.md`, then open the main figure `reports/figures/sales_vs_event_intensity.png` to see monthly sales plotted against event intensity over time. For coverage and data integrity, inspect `reports/tables/coverage_audit.csv` (month coverage across news/events/NAAMSA/panel) and `reports/tables/missingness_audit.csv` (months where sales totals are missing in the merged panel). Finally, review `reports/tables/lag_model_baseline.csv` for the baseline lag specification (events at t and t−1 with month/year controls) generated from `data/processed/panel_monthly_events_sales.csv`.
+
+
+---
+
+
 ## What this repo produces (current, reproducible outputs)
 
 ### Processed datasets (`data/processed/`)
@@ -85,6 +93,7 @@ Event labeling is **rule-based** (transparent), producing deterministic month-le
   Final tables saved by analysis scripts
 - `src/`  
   Pipeline code (news, events, naamsa, analysis, utils)
+- `docs/data_ethics.md` also summarizes collection constraints (robots/terms, minimization, and copyright-aware handling of text).
 
 ---
 
@@ -235,11 +244,26 @@ Regenerate with:
 
 ---
 
+## How to cite
+
+If you use or build on this repository, please cite it as:
+
+Walekhwa, P. L. T. (2026). *SA Auto Competition Pulse (Pilot): News-derived competition events and NAAMSA sales (South Africa)*. GitHub repository.
+
+---
+
+
 ## License / attribution
 
 This project uses publicly available sources and stores snapshots for research reproducibility.
 If any source requests removal or changes access policy, update `configs/sources.yaml` and remove that source from the pipeline.
 
+---
+
+## License & reuse
+
+Code is intended to be reusable under an open-source license (see `LICENSE` if included).  
+Data snapshots are collected from public sources for research reproducibility; downstream reuse should respect each publisher’s terms. The repository stores only what is necessary for measurement and auditability (see `docs/data_ethics.md`).
 
 
 ---
