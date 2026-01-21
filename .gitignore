@@ -19,6 +19,8 @@ __pycache__/
 
 # Testing / typecheck / coverage
 .pytest_cache/
+.pytest_cache/*
+pytestdebug.log
 .mypy_cache/
 .coverage
 htmlcov/
@@ -30,6 +32,7 @@ htmlcov/
 # OS-specific
 .DS_Store
 Thumbs.db
+Desktop.ini
 
 # Data (raw/intermediate only)
 data/raw/
@@ -45,3 +48,14 @@ local_dumps_ignore/
 
 # Optional: generated-only reports (keep curated figures/tables tracked)
 reports/_generated/
+
+# Local runtime artifacts
+*.tmp
+*.bak
+*.swp
+
+# Snapshots / manifests (safety net) - OPTIONAL
+# Only enable if you do NOT intend to track any .jsonl/.html anywhere.
+# *.jsonl
+# *.html
+# *.htm

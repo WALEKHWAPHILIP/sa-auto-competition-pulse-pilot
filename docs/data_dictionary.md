@@ -6,24 +6,24 @@ Regenerate anytime with:
 
 ## news_articles.csv
 - Path: `C:/apps/sa_motoring_pilot/sa-auto-competition-pulse/data/processed/news_articles.csv`
-- Rows: 3100
+- Rows: 3138
 - Columns: 13
 
 | column | dtype | missing_count | missing_pct | example_value |
 |---|---:|---:|---:|---|
-| article_id | object | 0 | 0.0 | 626c98ace46091d6 |
-| author | object | 1426 | 46.0 | Malcolm Libera |
-| fetched_at_utc | object | 0 | 0.0 | 2026-01-19T02:44:25Z |
-| published_at | object | 0 | 0.0 | 2026-01-18T08:00:00Z |
-| published_raw | object | 15 | 0.48 | 2026-01-18T08:00:00+00:00 |
-| simhash64 | uint64 | 0 | 0.0 | 9891045436295211187 |
-| snapshot_path | object | 0 | 0.0 | data\raw\news_html\businesstech_motoring\news_motoring_847949_big-changes-com... |
-| snapshot_sha256 | object | 0 | 0.0 | 6474cbf123129f4262b65a87665851183a1a1b06116d3d49994f1ff52f87ae3c |
+| article_id | object | 0 | 0.0 | 927759f69f835b64 |
+| author | object | 1435 | 45.73 | Malcolm Libera |
+| fetched_at_utc | object | 0 | 0.0 | 2026-01-21T00:44:31Z |
+| published_at | object | 0 | 0.0 | 2026-01-20T12:30:00Z |
+| published_raw | object | 16 | 0.51 | 2026-01-20T12:30:00+00:00 |
+| simhash64 | uint64 | 0 | 0.0 | 10598136931444133041 |
+| snapshot_path | object | 0 | 0.0 | data\raw\news_html\businesstech_motoring\news_motoring_848372_biggest-automot... |
+| snapshot_sha256 | object | 0 | 0.0 | 1f892de92c30b8b644c83f5a1c5c173e76adb96834235726f716b54502ef56ee |
 | source_id | object | 0 | 0.0 | businesstech_motoring |
-| text | object | 0 | 0.0 | Motoring Malcolm Libera 18 Jan 2026 Motoring Big changes coming for major die... |
-| text_sha256 | object | 0 | 0.0 | 626c98ace46091d67a6e79ce7a301c6a4e7573a6a118b99d3b0afc87d6ab40a5 |
-| title | object | 0 | 0.0 | Big changes coming for major diesel users in South Africa |
-| url | object | 0 | 0.0 | https://businesstech.co.za/news/motoring/847949/big-changes-coming-for-major-... |
+| text | object | 0 | 0.0 | Motoring Malcolm Libera 20 Jan 2026 Motoring Biggest automotive company in So... |
+| text_sha256 | object | 0 | 0.0 | 927759f69f835b643c0ff637483b321d86304a4b70b12630fcad6308131ea6d1 |
+| title | object | 0 | 0.0 | Biggest automotive company in South Africa in trouble |
+| url | object | 0 | 0.0 | https://businesstech.co.za/news/motoring/848372/biggest-automotive-company-in... |
 
 ## monthly_event_counts.csv
 - Path: `C:/apps/sa_motoring_pilot/sa-auto-competition-pulse/data/processed/monthly_event_counts.csv`
