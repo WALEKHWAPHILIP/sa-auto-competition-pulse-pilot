@@ -149,6 +149,12 @@ Event labeling is **rule-based** (transparent), producing deterministic month-le
 
 - `python -m src.analysis.run_lag_model_baseline`
 
+
+### 4) One-command runners (recommended)
+
+- `run_all.cmd` — rebuild pipeline + analysis outputs (uses existing local PDFs; scraping may take long if enabled in config).
+- `run_tests.cmd` — compile + unit tests + deterministic QA gate (offline).
+
 ---
 
 ## How to verify outputs quickly (no guessing)
@@ -253,6 +259,6 @@ Walekhwa, P. L. T. (2026). *SA Auto Competition Pulse (Pilot): News-derived comp
 
 This project uses publicly available sources and stores snapshots for research reproducibility and auditability.
 
-* **Code**: reusable under the open-source license included in this repository (see `LICENSE` if present).
+* **Code**: reusable under the open-source license included in this repository (see `LICENSE`).
 * **Data**: downstream reuse should respect each publisher’s terms and access policies. If any source requests removal or changes access policy, update `configs/sources.yaml` and remove that source from the pipeline (see `docs/data_ethics.md`).
 

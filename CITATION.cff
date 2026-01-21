@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the metadata from this file."
+type: software
+title: "SA Auto Competition Pulse (Pilot)"
+authors:
+  - family-names: "Walekhwa"
+    given-names: "Walekhwa Tambiti Leo Philip"
+year: 2026
+date-released: 2026-01-21
+repository-code: "https://github.com/WALEKHWAPHILIP/sa-auto-competition-pulse-pilot"
+keywords:
+  - "automotive"
+  - "competition dynamics"
+  - "news scraping"
+  - "event study"
+  - "South Africa"
+  - "NAAMSA"
+license: "MIT"
